@@ -25,59 +25,63 @@ function addData() {
     let pprice = parseInt(document.getElementById('pprice').value);
     let pdesc = document.getElementById('pdesc').value;
 
-    if(ids=='x') {
-        if(arrid==null) {
-            let data1 = [pid];
-            let data2 = [pname];
-            let data3 = [pimage];
-            let data4 = [pprice];
-            let data5 = [pdesc];
+    if(document.getElementById('pid').value!='' && pname!='' && pimage!='' && document.getElementById('pprice').value!='' && pdesc!='') {
+        if(ids=='x') {
+            if(arrid==null) {
+                let data1 = [pid];
+                let data2 = [pname];
+                let data3 = [pimage];
+                let data4 = [pprice];
+                let data5 = [pdesc];
 
-            localStorage.setItem('PID', JSON.stringify(data1));
-            localStorage.setItem('PNAME', JSON.stringify(data2));
-            localStorage.setItem('PIMAGE', JSON.stringify(data3));
-            localStorage.setItem('PPRICE', JSON.stringify(data4));
-            localStorage.setItem('PDESC', JSON.stringify(data5));
+                localStorage.setItem('PID', JSON.stringify(data1));
+                localStorage.setItem('PNAME', JSON.stringify(data2));
+                localStorage.setItem('PIMAGE', JSON.stringify(data3));
+                localStorage.setItem('PPRICE', JSON.stringify(data4));
+                localStorage.setItem('PDESC', JSON.stringify(data5));
+            } else {
+                arrid.push(pid);
+                arrname.push(pname);
+                arrimage.push(pimage);
+                arrprice.push(pprice);
+                arrdesc.push(pdesc);
+
+                localStorage.setItem('PID', JSON.stringify(arrid));
+                localStorage.setItem('PNAME', JSON.stringify(arrname));
+                localStorage.setItem('PIMAGE', JSON.stringify(arrimage));
+                localStorage.setItem('PPRICE', JSON.stringify(arrprice));
+                localStorage.setItem('PDESC', JSON.stringify(arrdesc));
+            }
+            document.getElementById('pid').value = '';
+            document.getElementById('pname').value = '';
+            document.getElementById('pimage').value = '';
+            document.getElementById('pprice').value = '';
+            document.getElementById('pdesc').value = '';
+
+            viewData();
         } else {
-            arrid.push(pid);
-            arrname.push(pname);
-            arrimage.push(pimage);
-            arrprice.push(pprice);
-            arrdesc.push(pdesc);
+            arrid[ids] = pid;
+            arrname[ids] = pname;
+            arrimage[ids] = pimage;
+            arrprice[ids] = pprice;
+            arrdesc[ids] = pdesc;
 
             localStorage.setItem('PID', JSON.stringify(arrid));
             localStorage.setItem('PNAME', JSON.stringify(arrname));
             localStorage.setItem('PIMAGE', JSON.stringify(arrimage));
             localStorage.setItem('PPRICE', JSON.stringify(arrprice));
             localStorage.setItem('PDESC', JSON.stringify(arrdesc));
+
+            document.getElementById('pid').value = '';
+            document.getElementById('pname').value = '';
+            document.getElementById('pimage').value = '';
+            document.getElementById('pprice').value = '';
+            document.getElementById('pdesc').value = '';
+            
+            viewData();
         }
-        document.getElementById('pid').value = '';
-        document.getElementById('pname').value = '';
-        document.getElementById('pimage').value = '';
-        document.getElementById('pprice').value = '';
-        document.getElementById('pdesc').value = '';
-
-        viewData();
     } else {
-        arrid[ids] = pid;
-        arrname[ids] = pname;
-        arrimage[ids] = pimage;
-        arrprice[ids] = pprice;
-        arrdesc[ids] = pdesc;
-
-        localStorage.setItem('PID', JSON.stringify(arrid));
-        localStorage.setItem('PNAME', JSON.stringify(arrname));
-        localStorage.setItem('PIMAGE', JSON.stringify(arrimage));
-        localStorage.setItem('PPRICE', JSON.stringify(arrprice));
-        localStorage.setItem('PDESC', JSON.stringify(arrdesc));
-
-        document.getElementById('pid').value = '';
-        document.getElementById('pname').value = '';
-        document.getElementById('pimage').value = '';
-        document.getElementById('pprice').value = '';
-        document.getElementById('pdesc').value = '';
-        
-        viewData();
+        alert('Product record not added. Please fill all the fields!');
     }
 }
 
@@ -262,4 +266,3 @@ function filterProducts() {
     }
     
 }
-
