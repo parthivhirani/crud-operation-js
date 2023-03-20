@@ -243,12 +243,10 @@ function sortByPrice() {
     viewData();
 }
 
-function filterProducts() {
-    let entry = document.getElementById('searchBar').value;
+function filterProducts(y) {
     let html1 ='';
-    if(entry!='') {
-        for(let x=0; x<arrname.length; x++) {
-            if(entry == arrname[x]) {
+        for(let x=0; x<arrid.length; x++) {
+            if(y == arrid[x]) {
                 html1 += `<tr>
                 <td>${arrid[x]}</td>
                 <td>${arrname[x]}</td>
@@ -261,8 +259,4 @@ function filterProducts() {
             }
             document.getElementById('tblrow').innerHTML = html1;
         }
-    } else {
-        viewData();
-    }
-    
 }
