@@ -57,8 +57,7 @@ function addData() {
             document.getElementById('pimage').value = '';
             document.getElementById('pprice').value = '';
             document.getElementById('pdesc').value = '';
-
-            viewData();
+            
         } else {
             arrid[ids] = pid;
             arrname[ids] = pname;
@@ -77,12 +76,11 @@ function addData() {
             document.getElementById('pimage').value = '';
             document.getElementById('pprice').value = '';
             document.getElementById('pdesc').value = '';
-            
-            viewData();
         }
     } else {
         alert('Product record not added. Please fill all the fields!');
     }
+    viewData();
 }
 
 function viewData() {
@@ -172,7 +170,7 @@ function sortByName() {
 
         for(var j=0; j < (arrid.length-i-1); j++) {
 
-          if(arrname[j] > arrname[j+1]) {
+          if(arrname[j].toUpperCase() > arrname[j+1].toUpperCase()) {
             var temp = arrid[j];
             arrid[j] = arrid[j + 1];
             arrid[j+1] = temp;
@@ -246,7 +244,7 @@ function sortByPrice() {
 function filterProducts(y) {
     let html1 ='';
         for(let x=0; x<arrid.length; x++) {
-            if(y == arrid[x]) {
+            if((arrid[x].toString()).includes((y).toString())) {
                 html1 += `<tr>
                 <td>${arrid[x]}</td>
                 <td>${arrname[x]}</td>
