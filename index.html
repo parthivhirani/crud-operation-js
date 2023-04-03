@@ -36,7 +36,7 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Product</button>
                         <!-- MODAL FORM PASTED BELOW -->
                     
-                </li>
+                    </li>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Filter Products by Product ID" aria-label="Search" id="searchBar" style="width: 400px;" oninput="filterProducts(this.value)">
@@ -53,39 +53,44 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Product Details</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" aria-label="Close" onclick="clsModal()"></button>
                             </div>
                             <form id="myform" enctype="multipart/form-data">
                                 <div class="modal-body">
                                     <table>
                                         <tr>
-                                            <td>Product ID:</td>
+                                            <td>*Product ID:</td>
                                             <td><input type="number" id="pid" name="pid"/></td>
                                         </tr>
+                                        <tr><td colspan="2" id="iderr" style="color: red;"></td></tr>
                                         <tr><td colspan="2"><br></td></tr>
 
                                         <tr>
-                                            <td>Product Name:</td>
-                                            <td><input type="text" id="pname" name="pname"/></td>
+                                            <td>*Product Name:</td>
+                                            <td><input type="text" id="pname" name="pname" maxlength="30"/></td>
                                         </tr>
+                                        <tr><td colspan="2" id="nameerr" style="color: red;"></td></tr>
                                         <tr><td colspan="2"><br></td></tr>
 
                                         <tr>
-                                            <td>Product Image:</td>
+                                            <td>*Product Image:</td>
                                             <td><input type="file"  id="pimage" name="pimage" accept="image/*"/></td>
                                         </tr>
+                                        <tr><td colspan="2" id="imgerr" style="color: red;"></td></tr>
                                         <tr><td colspan="2"><br></td></tr>
 
                                         <tr>
-                                            <td>Price:</td>
+                                            <td>*Price:</td>
                                             <td><input type="number" id="pprice" name="pprice"/></td>
                                         </tr>
+                                        <tr><td colspan="2" id="priceerr" style="color: red;"></td></tr>
                                         <tr><td colspan="2"><br></td></tr>
 
                                         <tr>
-                                            <td>Description:</td>
+                                            <td>*Description:</td>
                                             <td><textarea rows="3" cols="43" id="pdesc"></textarea></td>
                                         </tr>
+                                        <tr><td colspan="2" id="descerr" style="color: red;"></td></tr>
                                         <tr><td colspan="2"><br></td></tr>
 
                                         <tr>
@@ -96,8 +101,8 @@
                                 </div>
                             </form>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
-                                    <button type="button" id="addData" class="btn btn-primary" data-bs-dismiss="modal" data-bs-target="#staticBackdrop" onclick="addData()">Save</button>
+                                    <button type="button" class="btn btn-secondary" onclick="clsModal()">Dismiss</button>
+                                    <button type="button" id="addData" class="btn btn-primary" data-bs-target="#staticBackdrop" onclick="addData()">Save</button>
                                 </div>
                         </div>
                     </div>

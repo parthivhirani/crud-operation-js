@@ -18,6 +18,65 @@ document.getElementById('pimage').addEventListener('change', function() {
     reader.readAsDataURL(this.files[0]);
 });
 
+
+function clsModal() {
+    window.location.reload();
+}
+
+
+function validate() {
+    let pid = document.getElementById('pid').value;
+    let pname = document.getElementById('pname').value;
+    let pimage = base64;
+    let pprice = document.getElementById('pprice').value;
+    let pdesc = document.getElementById('pdesc').value;
+    let flag = true;
+    
+    if(pid=='') {
+        document.getElementById('iderr').innerHTML = "Enter product ID";
+        flag = false;
+    } else if(pid.length>6) {
+        document.getElementById('iderr').innerHTML = "Enter valid product ID (character < 6)";
+        flag = false;
+    } else {
+        document.getElementById('iderr').innerHTML = "";
+    }
+
+    if(pname=='') {
+        document.getElementById('nameerr').innerHTML = "Enter product name";
+        flag = false;
+    } else {
+        document.getElementById('nameerr').innerHTML = "";
+    }
+
+    if(pimage=='') {
+        document.getElementById('imgerr').innerHTML = "Enter product image";
+        flag = false;
+    } else {
+        document.getElementById('imgerr').innerHTML = "";
+    }
+    
+    if(pprice=='') {
+        document.getElementById('priceerr').innerHTML = "Enter product price";
+        flag = false;
+    } else if(parseFloat(pprice)>100000 || parseFloat(pprice)<=0) {
+        document.getElementById('priceerr').innerHTML = "Enter product price (less than 1 lakh)";
+        flag = false;
+    } else {
+        document.getElementById('priceerr').innerHTML = "";
+    }
+
+    if(pdesc=='') {
+        document.getElementById('descerr').innerHTML = "Enter product prdescriptionce";
+        flag = false;
+    } else {
+        document.getElementById('descerr').innerHTML = "";
+    }
+
+    return flag;
+}
+
+
 function addData() {
     let pid = parseInt(document.getElementById('pid').value);
     let pname = document.getElementById('pname').value;
@@ -25,7 +84,7 @@ function addData() {
     let pprice = parseInt(document.getElementById('pprice').value);
     let pdesc = document.getElementById('pdesc').value;
 
-    if(document.getElementById('pid').value!='' && pname!='' && pimage!='' && document.getElementById('pprice').value!='' && pdesc!='') {
+    if(validate()) {
         if(ids=='x') {
             if(arrid==null) {
                 let data1 = [pid];
@@ -39,6 +98,7 @@ function addData() {
                 localStorage.setItem('PIMAGE', JSON.stringify(data3));
                 localStorage.setItem('PPRICE', JSON.stringify(data4));
                 localStorage.setItem('PDESC', JSON.stringify(data5));
+
             } else {
                 arrid.push(pid);
                 arrname.push(pname);
@@ -51,6 +111,7 @@ function addData() {
                 localStorage.setItem('PIMAGE', JSON.stringify(arrimage));
                 localStorage.setItem('PPRICE', JSON.stringify(arrprice));
                 localStorage.setItem('PDESC', JSON.stringify(arrdesc));
+
             }
             document.getElementById('pid').value = '';
             document.getElementById('pname').value = '';
@@ -77,9 +138,11 @@ function addData() {
             document.getElementById('pprice').value = '';
             document.getElementById('pdesc').value = '';
         }
-    } else {
-        alert('Product record not added. Please fill all the fields!');
+
+        // $('#staticBackdrop').modal("hide");
+        location.reload();
     }
+
     viewData();
 }
 
