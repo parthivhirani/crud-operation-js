@@ -2,6 +2,7 @@
     top: 0;
     position: sticky;
     z-index: 1;
+    background-color: rgb(248, 249, 250);
 }
 
 .records {
@@ -13,4 +14,11 @@
 
 tr td {
     vertical-align: middle;
+}
+
+.product-form {
+    width: 500px;
+    margin: auto;
+    margin-top: 100px;
+    /* width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; */
 }

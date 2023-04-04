@@ -8,7 +8,7 @@ let arrprice = JSON.parse(localStorage.getItem('PPRICE'));
 let arrdesc = JSON.parse(localStorage.getItem('PDESC'));
 // localStorage.clear();
 
-viewData();
+// viewData();
 
 document.getElementById('pimage').addEventListener('change', function() {
     let reader = new FileReader();
@@ -38,6 +38,9 @@ function validate() {
     } else if(pid.length>6) {
         document.getElementById('iderr').innerHTML = "Enter valid product ID (character < 6)";
         flag = false;
+    } else if(!arrid.includes(pid)) {
+        document.getElementById('iderr').innerHTML = "Product ID must be unique";
+        flag = false;
     } else {
         document.getElementById('iderr').innerHTML = "";
     }
@@ -50,7 +53,7 @@ function validate() {
     }
 
     if(pimage=='') {
-        document.getElementById('imgerr').innerHTML = "Enter product image";
+        document.getElementById('imgerr').innerHTML = "Select product image";
         flag = false;
     } else {
         document.getElementById('imgerr').innerHTML = "";
@@ -59,8 +62,8 @@ function validate() {
     if(pprice=='') {
         document.getElementById('priceerr').innerHTML = "Enter product price";
         flag = false;
-    } else if(parseFloat(pprice)>100000 || parseFloat(pprice)<=0) {
-        document.getElementById('priceerr').innerHTML = "Enter product price (less than 1 lakh)";
+    } else if(parseFloat(pprice)>1000000 || parseFloat(pprice)<=0) {
+        document.getElementById('priceerr').innerHTML = "Enter product price (less than 10 lakh)";
         flag = false;
     } else {
         document.getElementById('priceerr').innerHTML = "";
@@ -138,12 +141,17 @@ function addData() {
             document.getElementById('pprice').value = '';
             document.getElementById('pdesc').value = '';
         }
+        // location.reload();
 
-        // $('#staticBackdrop').modal("hide");
-        location.reload();
+        const toastTrigger = document.getElementById('addData');
+        const toastLiveExample = document.getElementById('liveToast');
+        if (toastTrigger) {
+            // toastTrigger.addEventListener('click', () => {
+                const toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();
+            // })
+        }
     }
-
-    viewData();
 }
 
 function viewData() {
@@ -307,7 +315,7 @@ function sortByPrice() {
 function filterProducts(y) {
     let html1 ='';
         for(let x=0; x<arrid.length; x++) {
-            if((arrid[x].toString()).includes((y).toString())) {
+            if((arrname[x].toUpperCase()).includes(y.toUpperCase()) || (arrdesc[x].toUpperCase()).includes(y.toUpperCase())) {
                 html1 += `<tr>
                 <td>${arrid[x]}</td>
                 <td>${arrname[x]}</td>
