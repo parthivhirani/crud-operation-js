@@ -38,10 +38,12 @@ function validate() {
     } else if(pid.length>6) {
         document.getElementById('iderr').innerHTML = "Enter valid product ID (character < 6)";
         flag = false;
-    } else if(!arrid.includes(pid)) {
-        document.getElementById('iderr').innerHTML = "Product ID must be unique";
-        flag = false;
-    } else {
+    } 
+    // else if(!arrid.includes(pid)) {
+    //     document.getElementById('iderr').innerHTML = "Product ID must be unique";
+    //     flag = false;
+    // } 
+    else {
         document.getElementById('iderr').innerHTML = "";
     }
 
@@ -314,18 +316,18 @@ function sortByPrice() {
 
 function filterProducts(y) {
     let html1 ='';
-        for(let x=0; x<arrid.length; x++) {
-            if((arrname[x].toUpperCase()).includes(y.toUpperCase()) || (arrdesc[x].toUpperCase()).includes(y.toUpperCase())) {
-                html1 += `<tr>
-                <td>${arrid[x]}</td>
-                <td>${arrname[x]}</td>
-                <td><div style="width:100px; height:100px;"><img style="max-width: 100%; max-height:100%;" src="${arrimage[x]}"/></div</td>
-                <td>${arrprice[x]}</td>
-                <td>${arrdesc[x]}</td>
-                <td><button class="btn" onclick="editData(${x})" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fas fa-edit"></i></button></td>
-                <td><button class="btn" onclick="deleteData(${x})"><i class="fa-solid fa-trash"></i></button></td>
-                </tr>`;
-            }
-            document.getElementById('tblrow').innerHTML = html1;
+    for(let x=0; x<arrid.length; x++) {
+        if((arrname[x].toUpperCase()).includes(y.toUpperCase()) || (arrdesc[x].toUpperCase()).includes(y.toUpperCase())) {
+            html1 += `<tr>
+            <td>${arrid[x]}</td>
+            <td>${arrname[x]}</td>
+            <td><div style="width:100px; height:100px;"><img style="max-width: 100%; max-height:100%;" src="${arrimage[x]}"/></div</td>
+            <td>${arrprice[x]}</td>
+            <td>${arrdesc[x]}</td>
+            <td><button class="btn" onclick="editData(${x})" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fas fa-edit"></i></button></td>
+            <td><button class="btn" onclick="deleteData(${x})"><i class="fa-solid fa-trash"></i></button></td>
+            </tr>`;
         }
+        document.getElementById('tblrow').innerHTML = html1;
+    }
 }
