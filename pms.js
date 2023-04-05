@@ -25,12 +25,13 @@ function clsModal() {
 
 
 function validate() {
-    let pid = document.getElementById('pid').value;
+    let pid = parseInt(document.getElementById('pid').value);
     let pname = document.getElementById('pname').value;
     let pimage = base64;
     let pprice = document.getElementById('pprice').value;
     let pdesc = document.getElementById('pdesc').value;
     let flag = true;
+    
     
     if(pid=='') {
         document.getElementById('iderr').innerHTML = "Enter product ID";
@@ -38,12 +39,13 @@ function validate() {
     } else if(pid.length>6) {
         document.getElementById('iderr').innerHTML = "Enter valid product ID (character < 6)";
         flag = false;
-    } 
-    else if(!arrid.includes(pid)) {
-        document.getElementById('iderr').innerHTML = "Product ID must be unique";
+    } else if(parseInt(pid)<1) {
+        document.getElementById('iderr').innerHTML = "Product ID must be greater than 0";
         flag = false;
-    } 
-    else {
+    } else if(!(localStorage.getItem('PID')===null) && JSON.parse(localStorage.getItem('PID')).includes(pid)) {
+        document.getElementById('iderr').innerHTML = "Enter unique product ID";
+        flag = false;
+    } else {
         document.getElementById('iderr').innerHTML = "";
     }
 
