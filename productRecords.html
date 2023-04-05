@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/clipboard.png"/>
     <title>Product Records</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="pms.css"/>
@@ -50,42 +51,42 @@
         <div class="modal-dialog" id="modal1">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Product Details</h1>
-                    <button type="button" class="btn-close" aria-label="Close" onclick="clsModal()"></button>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Product</h1>
+                    <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="myform" enctype="multipart/form-data">
                     <div class="modal-body">
                         <table>
                             <tr>
-                                <td>*Product ID:</td>
-                                <td><input type="number" id="pid" name="pid"/></td>
+                                <td><span style="color: red;">*</span>Product ID:</td>
+                                <td><input type="number" id="pid" name="pid" disabled/></td>
                             </tr>
                             <tr><td colspan="2" id="iderr" style="color: red;"></td></tr>
                             <tr><td colspan="2"><br></td></tr>
 
                             <tr>
-                                <td>*Product Name:</td>
+                                <td><span style="color: red;">*</span>Product Name:</td>
                                 <td><input type="text" id="pname" name="pname" maxlength="30"/></td>
                             </tr>
                             <tr><td colspan="2" id="nameerr" style="color: red;"></td></tr>
                             <tr><td colspan="2"><br></td></tr>
 
                             <tr>
-                                <td>*Product Image:</td>
+                                <td><span style="color: red;">*</span>Product Image:</td>
                                 <td><input type="file"  id="pimage" name="pimage" accept="image/*"/></td>
                             </tr>
                             <tr><td colspan="2" id="imgerr" style="color: red;"></td></tr>
                             <tr><td colspan="2"><br></td></tr>
 
                             <tr>
-                                <td>*Price:</td>
+                                <td><span style="color: red;">*</span>Price:</td>
                                 <td><input type="number" id="pprice" name="pprice"/></td>
                             </tr>
                             <tr><td colspan="2" id="priceerr" style="color: red;"></td></tr>
                             <tr><td colspan="2"><br></td></tr>
 
                             <tr>
-                                <td>*Description:</td>
+                                <td><span style="color: red;">*</span>Description:</td>
                                 <td><textarea rows="3" cols="43" id="pdesc"></textarea></td>
                             </tr>
                             <tr><td colspan="2" id="descerr" style="color: red;"></td></tr>
@@ -99,8 +100,8 @@
                     </div>
                 </form>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" onclick="clsModal()">Dismiss</button>
-                        <button type="button" id="addData" class="btn btn-primary" onclick="addData()">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+                        <button type="button" id="editData" class="btn btn-primary" onclick="addData()">Update</button>
                     </div>
             </div>
         </div>

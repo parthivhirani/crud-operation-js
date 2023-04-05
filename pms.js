@@ -20,33 +20,37 @@ document.getElementById('pimage').addEventListener('change', function() {
 
 
 function clsModal() {
-    window.location.reload();
+    document.getElementById("product-form").reset();
 }
 
 
 function validate() {
-    let pid = parseInt(document.getElementById('pid').value);
+
+    let pid = document.getElementById('pid').value;
     let pname = document.getElementById('pname').value;
     let pimage = base64;
     let pprice = document.getElementById('pprice').value;
     let pdesc = document.getElementById('pdesc').value;
     let flag = true;
-    
-    
-    if(pid=='') {
-        document.getElementById('iderr').innerHTML = "Enter product ID";
-        flag = false;
-    } else if(pid.length>6) {
-        document.getElementById('iderr').innerHTML = "Enter valid product ID (character < 6)";
-        flag = false;
-    } else if(parseInt(pid)<1) {
-        document.getElementById('iderr').innerHTML = "Product ID must be greater than 0";
-        flag = false;
-    } else if(!(localStorage.getItem('PID')===null) && JSON.parse(localStorage.getItem('PID')).includes(pid)) {
-        document.getElementById('iderr').innerHTML = "Enter unique product ID";
-        flag = false;
-    } else {
-        document.getElementById('iderr').innerHTML = "";
+
+    if(document.getElementById('pid').disabled==false) {
+        if(pid=='') {
+            document.getElementById('iderr').innerHTML = "Enter product ID";
+            flag = false;
+        } else if(pid.length>6) {
+            document.getElementById('iderr').innerHTML = "Enter valid product ID (character < 6)";
+            flag = false;
+        } else if(parseInt(pid)<1) {
+            document.getElementById('iderr').innerHTML = "Product ID must be greater than 0";
+            flag = false;
+        } 
+        else if(!(localStorage.getItem('PID')===null) && JSON.parse(localStorage.getItem('PID')).includes(parseInt(pid))) {
+            document.getElementById('iderr').innerHTML = "Enter unique product ID";
+            flag = false;
+        } 
+        else {
+            document.getElementById('iderr').innerHTML = "";
+        }
     }
 
     if(pname=='') {
@@ -85,6 +89,12 @@ function validate() {
 
 
 function addData() {
+    arrid = JSON.parse(localStorage.getItem('PID'));
+    arrname = JSON.parse(localStorage.getItem('PNAME'));
+    arrimage = JSON.parse(localStorage.getItem('PIMAGE'));
+    arrprice = JSON.parse(localStorage.getItem('PPRICE'));
+    arrdesc = JSON.parse(localStorage.getItem('PDESC'));
+
     let pid = parseInt(document.getElementById('pid').value);
     let pname = document.getElementById('pname').value;
     let pimage = base64;
@@ -94,6 +104,7 @@ function addData() {
     if(validate()) {
         if(ids=='x') {
             if(arrid==null) {
+                console.log('hello');
                 let data1 = [pid];
                 let data2 = [pname];
                 let data3 = [pimage];
@@ -120,11 +131,6 @@ function addData() {
                 localStorage.setItem('PDESC', JSON.stringify(arrdesc));
 
             }
-            document.getElementById('pid').value = '';
-            document.getElementById('pname').value = '';
-            document.getElementById('pimage').value = '';
-            document.getElementById('pprice').value = '';
-            document.getElementById('pdesc').value = '';
             
         } else {
             arrid[ids] = pid;
@@ -138,28 +144,28 @@ function addData() {
             localStorage.setItem('PIMAGE', JSON.stringify(arrimage));
             localStorage.setItem('PPRICE', JSON.stringify(arrprice));
             localStorage.setItem('PDESC', JSON.stringify(arrdesc));
-
-            document.getElementById('pid').value = '';
-            document.getElementById('pname').value = '';
-            document.getElementById('pimage').value = '';
-            document.getElementById('pprice').value = '';
-            document.getElementById('pdesc').value = '';
         }
-        // location.reload();
+        
 
-        const toastTrigger = document.getElementById('addData');
-        const toastLiveExample = document.getElementById('liveToast');
-        if (toastTrigger) {
-            // toastTrigger.addEventListener('click', () => {
-                const toast = new bootstrap.Toast(toastLiveExample);
-                toast.show();
-            // })
+        if(document.getElementById('pid').disabled==false) {
+            const toastTrigger = document.getElementById('addData');
+            const toastLiveExample = document.getElementById('liveToast');
+            if (toastTrigger) {
+                // toastTrigger.addEventListener('click', () => {
+                    const toast = new bootstrap.Toast(toastLiveExample);
+                    toast.show();
+                // })
+            }
+            document.getElementById("product-form").reset();
+        } else {
+            location.reload();
         }
     }
 }
 
 function viewData() {
-    if(arrid!='') {
+
+    if(arrid!==null) {
         let html = '';
         for(k in arrid) {
             html += `<tr>
@@ -177,6 +183,7 @@ function viewData() {
 }
 
 function editData(delid) {
+
     ids = delid;
     base64 = arrimage[delid];
     document.getElementById('pid').value = arrid[delid];
@@ -186,6 +193,7 @@ function editData(delid) {
 }
 
 function deleteData(delid) {
+
     arrid.splice(delid, 1);
     arrname.splice(delid, 1);
     arrimage.splice(delid, 1);
@@ -203,6 +211,7 @@ function deleteData(delid) {
 
 
 function sortById() {
+
     for(var i = 0; i<arrid.length; i++) {
 
         for(var j=0; j < (arrid.length-i-1); j++) {
@@ -241,6 +250,7 @@ function sortById() {
 }
 
 function sortByName() {
+
     for(var i = 0; i<arrid.length; i++) {
 
         for(var j=0; j < (arrid.length-i-1); j++) {
@@ -279,6 +289,7 @@ function sortByName() {
 }
 
 function sortByPrice() {
+
     for(var i = 0; i<arrid.length; i++) {
 
         for(var j=0; j < (arrid.length-i-1); j++) {
@@ -317,6 +328,7 @@ function sortByPrice() {
 }
 
 function filterProducts(y) {
+
     let html1 ='';
     for(let x=0; x<arrid.length; x++) {
         if((arrname[x].toUpperCase()).includes(y.toUpperCase()) || (arrdesc[x].toUpperCase()).includes(y.toUpperCase())) {
