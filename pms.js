@@ -39,10 +39,10 @@ function validate() {
         document.getElementById('iderr').innerHTML = "Enter valid product ID (character < 6)";
         flag = false;
     } 
-    // else if(!arrid.includes(pid)) {
-    //     document.getElementById('iderr').innerHTML = "Product ID must be unique";
-    //     flag = false;
-    // } 
+    else if(!arrid.includes(pid)) {
+        document.getElementById('iderr').innerHTML = "Product ID must be unique";
+        flag = false;
+    } 
     else {
         document.getElementById('iderr').innerHTML = "";
     }
